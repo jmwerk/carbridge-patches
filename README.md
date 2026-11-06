@@ -23,20 +23,16 @@ the other patches you apply (for example, branding and icon changes keep working
 ## Patches list
 
 <!-- PATCHES_START EXPANDED -->
+> **[v1.0.0-dev.1](https://github.com/jmwerk/carbridge-patches/releases/tag/v1.0.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+<details open>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
 
-### Universal (any app)
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Show in Android Auto](#show-in-android-auto) | Lists the app in the Android Auto launcher and shows its full interface on the car screen while parked. |  |
 
-- **Show in Android Auto**: lists the app in the Android Auto launcher and shows its full
-  interface on the car screen while parked. It changes only `AndroidManifest.xml` and adds
-  `res/xml/carbridge_automotive_app_desc.xml`:
-  - `<application>`: `android:appCategory="game"`, meta-data `distractionOptimized=true`,
-    `androidx.car.app.minCarApiLevel=7` and, if missing, `com.google.android.gms.car.application`
-  - permissions `androidx.car.app.ACCESS_SURFACE` and `androidx.car.app.MAP_TEMPLATES`
-  - every MAIN/LAUNCHER activity and activity-alias: categories `CAR_LAUNCHER`,
-    `androidx.car.app.category.NAVIGATION` and `APP_MAPS`, meta-data `distractionOptimized=true`,
-    `android:resizeableActivity="true"`
-  - removes media-browser and car-app-service intent filters, so Android Auto shows the app
-    instead of its template UI
+</details>
 
 <!-- PATCHES_END -->
 
