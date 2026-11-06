@@ -1,6 +1,7 @@
 package org.carbridge.patches.androidauto
 
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.document
 import app.morphe.patcher.patch.patch
 import app.morphe.patcher.patch.resourceFile
@@ -19,11 +20,11 @@ private val CAR_CATEGORIES = listOf(
     "androidx.car.app.category.NAVIGATION",
     "android.intent.category.APP_MAPS",
 )
-private val TEMPLATE_SERVICE_ACTIONS = setOf(
+private val MEDIA_SERVICE_ACTIONS = setOf(
     "android.media.browse.MediaBrowserService",
     "androidx.media3.session.MediaLibraryService",
-    "androidx.car.app.CarAppService",
 )
+private const val CAR_APP_SERVICE_ACTION = "androidx.car.app.CarAppService"
 
 @Suppress("unused")
 val showInAndroidAutoPatch = patch(
@@ -33,6 +34,14 @@ val showInAndroidAutoPatch = patch(
     default = false,
 ) {
     // No compatibleWith: the patch applies to any app.
+    val keepMediaServicesOption = booleanOption(
+        key = "keepMediaServices",
+        default = false,
+        title = "Keep media services",
+        description = "Keep the app's media browser service, so music and podcast apps keep their " +
+            "Android Auto audio player. Android Auto may then show that player instead of the full app.",
+    )
+
     execute {
         document("AndroidManifest.xml").use { doc ->
             val manifest = doc.documentElement
@@ -40,7 +49,12 @@ val showInAndroidAutoPatch = patch(
                 ?: throw PatchException("Manifest has no <application>")
 
             addCarEntries(doc, manifest, app)
-            stripTemplateServices(app)
+            val stripped = if (keepMediaServicesOption.value == true) {
+                setOf(CAR_APP_SERVICE_ACTION)
+            } else {
+                MEDIA_SERVICE_ACTIONS + CAR_APP_SERVICE_ACTION
+            }
+            stripTemplateServices(app, stripped)
         }
     }
 }
@@ -96,11 +110,11 @@ private fun addAutomotiveDescriptor() {
 }
 
 /** A media or car-template service makes Android Auto show its template UI instead of the app. */
-private fun stripTemplateServices(app: Element) {
+private fun stripTemplateServices(app: Element, strippedActions: Set<String>) {
     for (service in app.children("service")) {
         for (filter in service.children("intent-filter")) {
             val actions = filter.children("action").mapNotNull { it.androidName }
-            if (actions.any { it in TEMPLATE_SERVICE_ACTIONS }) service.removeChild(filter)
+            if (actions.any { it in strippedActions }) service.removeChild(filter)
         }
     }
 }
