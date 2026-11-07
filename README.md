@@ -46,6 +46,18 @@ re-sign the app.
 3. Install the patched app. Android Auto lists sideloaded apps only with developer mode on:
    Android Auto settings → tap *Version* 10× → ⋮ → Developer settings → enable **Unknown sources**.
 
+## Recommended options
+
+| App | Show in Android Auto options | What you get |
+|---|---|---|
+| Video apps, e.g. YouTube | Defaults | The full app on the car screen |
+| Music and podcast apps, e.g. YouTube Music | **Keep media services** on | Android Auto's own audio player, which is safer while driving |
+| Music apps, when you want the full app while parked | Defaults | The full app; its Android Auto audio player is gone |
+| Games and portrait-only apps | Defaults (**Fill the car screen** on) | Screens fill the wide car display; turn it off if a screen breaks |
+
+Combine it with the app's usual Morphe patches. Results for specific apps are in CarBridge's
+[compatibility list](https://github.com/jmwerk/CarBridge/blob/master/COMPATIBILITY.md).
+
 ## Patches list
 
 <!-- PATCHES_START EXPANDED -->
