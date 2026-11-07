@@ -35,16 +35,38 @@ re-sign the app.
 
 ## How to use these patches
 
-1. In Morphe Manager, add this patch source: tap the button below, or add the URL
-   `https://github.com/jmwerk/carbridge-patches` under **Patch sources**.
+1. In Morphe Manager, add this patch source: tap the button below, or open **Sources** in the
+   bottom bar, tap **+** and add `https://github.com/jmwerk/carbridge-patches`.
 
    <a href="https://morphe.software/add-source?github=jmwerk/carbridge-patches">
      <img src=".github/assets/add-to-morphe.svg" alt="Add to Morphe Manager" height="48">
    </a>
 
-2. Patch an app as usual and enable **Show in Android Auto** (it is off by default).
-3. Install the patched app. Android Auto lists sideloaded apps only with developer mode on:
+2. Turn on **Settings → Expert mode**. The patch is off by default, and only Expert mode lets
+   you pick patches.
+3. Choose the app:
+   - Apps in Morphe's list, like YouTube: tap the app on the **Apps** screen and pick a version.
+   - Any other app: tap **Select other apps** at the top of the **Apps** screen, then pick an
+     APK from storage or an installed app.
+4. On the patch list, open the **CarBridge Patches** tab and turn on **Show in Android Auto**.
+   Its settings icon has the [options](#recommended-options). Keep the app's usual patches on
+   in their own tab.
+5. Tap **Patch**. Morphe warns about mixing patch sources; you can continue.
+6. Install the patched app. Android Auto lists sideloaded apps only with developer mode on:
    Android Auto settings → tap *Version* 10× → ⋮ → Developer settings → enable **Unknown sources**.
+   Then reconnect to Android Auto.
+
+## Recommended options
+
+| App | Show in Android Auto options | What you get |
+|---|---|---|
+| Video apps, e.g. YouTube | Defaults | The full app on the car screen |
+| Music and podcast apps, e.g. YouTube Music | **Keep media services** on | Android Auto's own audio player, which is safer while driving |
+| Music apps, when you want the full app while parked | Defaults | The full app; its Android Auto audio player is gone |
+| Games and portrait-only apps | Defaults (**Fill the car screen** on) | Screens fill the wide car display; turn it off if a screen breaks |
+
+Combine it with the app's usual Morphe patches. Results for specific apps are in CarBridge's
+[compatibility list](https://github.com/jmwerk/CarBridge/blob/master/COMPATIBILITY.md).
 
 ## Patches list
 
@@ -86,6 +108,17 @@ Morphe Manager.
 Releases are made by `.github/workflows/release.yml` (semantic-release) from conventional commits:
 `feat:` and `fix:` on `dev` make pre-releases, merging `dev` into `main` makes a stable release.
 Do not create releases or edit `patches-list.json`, `patches-bundle.json` or `CHANGELOG.md` by hand.
+
+## Inspiration
+
+[AAAnything](https://github.com/kododake/AAAnything) showed that everyday apps can run on Android
+Auto without root. These patches are a separate, from-scratch take that shares no code with it, and
+they are free and open source for every app, with no tiers or sign-in.
+
+## Support
+
+These patches are free and will stay that way. If they're useful to you, you can
+[buy me a coffee](https://buymeacoffee.com/jmwerk). It's entirely optional and doesn't unlock anything.
 
 ## License
 
