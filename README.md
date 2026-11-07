@@ -35,16 +35,26 @@ re-sign the app.
 
 ## How to use these patches
 
-1. In Morphe Manager, add this patch source: tap the button below, or add the URL
-   `https://github.com/jmwerk/carbridge-patches` under **Patch sources**.
+1. In Morphe Manager, add this patch source: tap the button below, or open **Sources** in the
+   bottom bar, tap **+** and add `https://github.com/jmwerk/carbridge-patches`.
 
    <a href="https://morphe.software/add-source?github=jmwerk/carbridge-patches">
      <img src=".github/assets/add-to-morphe.svg" alt="Add to Morphe Manager" height="48">
    </a>
 
-2. Patch an app as usual and enable **Show in Android Auto** (it is off by default).
-3. Install the patched app. Android Auto lists sideloaded apps only with developer mode on:
+2. Turn on **Settings → Expert mode**. The patch is off by default, and only Expert mode lets
+   you pick patches.
+3. Choose the app:
+   - Apps in Morphe's list, like YouTube: tap the app on the **Apps** screen and pick a version.
+   - Any other app: tap **Select other apps** at the top of the **Apps** screen, then pick an
+     APK from storage or an installed app.
+4. On the patch list, open the **CarBridge Patches** tab and turn on **Show in Android Auto**.
+   Its settings icon has the [options](#recommended-options). Keep the app's usual patches on
+   in their own tab.
+5. Tap **Patch**. Morphe warns about mixing patch sources; you can continue.
+6. Install the patched app. Android Auto lists sideloaded apps only with developer mode on:
    Android Auto settings → tap *Version* 10× → ⋮ → Developer settings → enable **Unknown sources**.
+   Then reconnect to Android Auto.
 
 ## Recommended options
 
