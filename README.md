@@ -99,6 +99,17 @@ Releases are made by `.github/workflows/release.yml` (semantic-release) from con
 `feat:` and `fix:` on `dev` make pre-releases, merging `dev` into `main` makes a stable release.
 Do not create releases or edit `patches-list.json`, `patches-bundle.json` or `CHANGELOG.md` by hand.
 
+## Inspiration
+
+[AAAnything](https://github.com/kododake/AAAnything) showed that everyday apps can run on Android
+Auto without root. These patches are a separate, from-scratch take that shares no code with it, and
+they are free and open source for every app, with no tiers or sign-in.
+
+## Support
+
+These patches are free and will stay that way. If they're useful to you, you can
+[buy me a coffee](https://buymeacoffee.com/jmwerk). It's entirely optional and doesn't unlock anything.
+
 ## License
 
 CarBridge Patches are licensed under the [GNU General Public License v3.0](LICENSE).
