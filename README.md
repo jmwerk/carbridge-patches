@@ -23,20 +23,25 @@ the other patches you apply (for example, branding and icon changes keep working
 ## Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.0](https://github.com/jmwerk/carbridge-patches/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+> **[v1.2.0-dev.1](https://github.com/jmwerk/carbridge-patches/releases/tag/v1.2.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
 <details open>
 <summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Show in Android Auto](#show-in-android-auto) | Lists the app in the Android Auto launcher and shows its full interface on the car screen while parked. | • Keep media services |
+| [Show in Android Auto](#show-in-android-auto) | Lists the app in the Android Auto launcher and shows its full interface on the car screen while parked. | • Keep media services<br>• Fill the car screen |
 
 </details>
 
 <!-- PATCHES_END -->
 
 ## Building locally
+
+The Android Auto rules come from CarBridge's `core` module, included as the `carbridge`
+git submodule, so the app and this patch always make the same changes. Clone with
+`git clone --recursive`, or run `git submodule update --init` in an existing clone. To pick up
+new rules, update the submodule to a newer CarBridge commit.
 
 The Gradle plugin comes from GitHub Packages, so Gradle needs a GitHub token with the
 `read:packages` scope, as `gpr.user`/`gpr.key` in `~/.gradle/gradle.properties` or as
