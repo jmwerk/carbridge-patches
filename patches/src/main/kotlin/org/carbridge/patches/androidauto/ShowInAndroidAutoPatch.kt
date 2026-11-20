@@ -42,7 +42,13 @@ val showInAndroidAutoPatch = patch(
                 fillScreen = fillScreenOption.value != false,
             )
             try {
-                CarPatch.apply(DomHost(doc), options)
+                val host = DomHost(doc) { path, text ->
+                    resourceFile(path, false).apply {
+                        parentFile.mkdirs()
+                        writeText(text)
+                    }
+                }
+                CarPatch.apply(host, options)
             } catch (e: IllegalStateException) {
                 throw PatchException(e.message ?: "Show in Android Auto failed")
             }
@@ -50,8 +56,14 @@ val showInAndroidAutoPatch = patch(
     }
 }
 
-/** Morphe's decoded manifest, where attributes are written as `android:<name>` text. */
-private class DomHost(private val doc: Document) : ManifestHost {
+/**
+ * Morphe's decoded manifest, where attributes are written as `android:<name>` text.
+ * [writeResource] gets a path such as `res/xml/name.xml` and the file's text.
+ */
+internal class DomHost(
+    private val doc: Document,
+    private val writeResource: (path: String, text: String) -> Unit,
+) : ManifestHost {
     override val manifest = DomElement(doc.documentElement)
     override val application = manifest.children("application").firstOrNull()
         ?: throw PatchException("Manifest has no <application>")
@@ -66,17 +78,17 @@ private class DomHost(private val doc: Document) : ManifestHost {
     }
 
     override fun addAutomotiveDescriptor(name: String, uses: String) {
-        resourceFile("res/xml/$name.xml", false).apply {
-            parentFile.mkdirs()
-            writeText("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<automotiveApp>\n    <uses name=\"$uses\"/>\n</automotiveApp>\n")
-        }
+        writeResource(
+            "res/xml/$name.xml",
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<automotiveApp>\n    <uses name=\"$uses\"/>\n</automotiveApp>\n",
+        )
     }
 
     // Morphe shows patch progress itself
     override fun log(message: String) = Unit
 }
 
-private class DomElement(val el: Element) : ManifestElement {
+internal class DomElement(val el: Element) : ManifestElement {
     override val tag: String get() = el.tagName
 
     override fun children(tag: String): List<ManifestElement> {
